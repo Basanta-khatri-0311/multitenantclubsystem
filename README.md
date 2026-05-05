@@ -2,78 +2,63 @@
 
 ## 📌 Overview
 
-This project is a multi-tenant platform designed for institutions such as schools, colleges, and communities to manage technical clubs and structured learning.
+A multi-tenant platform for institutions (schools, colleges, communities) to manage structured, mentor-driven learning through clubs.
 
-It enables mentor-driven learning through tasks, student submissions, reviews, and performance tracking via badges and points.
+Students participate in clubs, complete tasks, submit work, and build a portfolio of achievements over time.
 
 ---
 
 ## 🧠 Core Architecture
 
-The system follows a multi-tenant + user-centric design:
+The system follows:
 
-- Each institution is a Tenant
-- Users have a global identity
-- Users participate in tenants via time-bound memberships
-- Data is isolated per tenant
-- Users can view their aggregated progress across tenants
+- Multi-Tenant Architecture → Data isolated per institution
+- Global User Identity → One user across all tenants
+- Sequential Tenancy → Users belong to only one active institution at a time
+- Time-Bound Memberships → Tracks user journey and builds a continuous global portfolio
+- Dual Visibility Model → Tenant-restricted active view + User-global historical view
 
 ---
 
 ## 👥 Roles
 
 ### Super Admin
-- Manages platform
-- Creates tenants
+- Creates and manages tenants
 
 ### Admin (Tenant Owner)
-- Manages institution
-- Creates clubs
-- Assigns mentors
-- Manages users
+- Manages users, clubs, mentors
 
 ### Mentor
-- Assigned to clubs
-- Creates and manages tasks
+- Creates tasks
 - Reviews submissions
-- Can suspend tasks
+- Suspends tasks (cannot delete)
 
 ### Student
 - Joins clubs
 - Submits tasks
-- Earns badges and points
+- Earns points and badges
 
 ---
 
 ## 🧩 Core Entities
 
-- User → Global identity
-- Tenant → Institution
-- Membership → User ↔ Tenant ↔ Role (time-bound)
-- Club → Tenant-specific group
-- Task → Assigned by mentor
-- Submission → Student work (versioned)
-- Badge → System-generated achievement
+- User (global identity)
+- Tenant (institution)
+- Membership (user ↔ tenant ↔ role, time-bound)
+- Club
+- Task
+- Submission (versioned)
+- Badge
 
 ---
 
-## 🔗 Relationships
-
-User → Membership → Tenant  
-Tenant → Clubs  
-Club → Tasks  
-Task → Submissions  
-User → Submissions  
-
----
-
-## 🔐 Data Visibility Model
+## 🔐 Data Visibility
 
 ### Tenant Scope
-- Admins and mentors can only access data within their tenant
+- Admins and mentors can only access their tenant’s data
 
 ### User Scope
-- Users can view their complete activity across all tenants
+- Users can view their complete history across all tenants
 
 ---
 
@@ -95,13 +80,13 @@ User → Submissions
 ## ⚙️ Key Rules
 
 - Tasks can be suspended (hidden)
-- Only admins can delete resources
-- Students can join multiple clubs (limited by tenant config)
-- Memberships are time-bound
+- Only admins can delete
+- Memberships are time-bound (Sequential Tenancy)
+- Students can join multiple clubs within their active tenant
 
 ---
 
-## 🚫 Current Scope
+## 🚫 Scope Limitations
 
 - No cross-tenant leaderboard
 - No mentor marketplace
@@ -110,10 +95,10 @@ User → Submissions
 
 ## 📌 Progress
 
-- [x] System design
-- [x] Core flow design
-- [ ] Database schema
-- [ ] Backend
+- [x] System Design
+- [x] Core Flow Design
+- [ ] Database Schema
+- [ ] Backend Implementation
 - [ ] Frontend
 
 ---
@@ -123,4 +108,4 @@ User → Submissions
 - MongoDB
 - Express.js
 - React.js
-- Node.
+- Node.js
